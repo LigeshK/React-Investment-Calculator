@@ -11,6 +11,9 @@ function App() {
     duration: 10,
   }); // This state could be used to handle form submission or input changes in the future - lifted state
 
+  //Validations
+  const inputIsValid = userInput.duration >= 1; //  validation: duration must be greater than 1 year
+
   // This function could be used to handle changes in the input fields
   // and update the userInput state accordingly.
   function handleChange(inputIdentifier, newValue) {
@@ -29,7 +32,12 @@ function App() {
     <>
       <Header />
       <UserInput userInput={userInput} onChange={handleChange} />
-      <Results input={userInput} />
+      {!inputIsValid && (
+        <p className="center">
+          Please input valid data for duration (greater than 0)
+        </p>
+      )}
+      {inputIsValid && <Results input={userInput} />}
     </>
   );
 }
